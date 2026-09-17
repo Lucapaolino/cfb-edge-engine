@@ -1,0 +1,113 @@
+{
+  "artifact_version": "cfb_nn_2026_v1",
+  "created_utc": "2026-09-12T16:36:52+00:00",
+  "status": "RESEARCH_ONLY",
+  "prospective_validation_season": 2026,
+  "training_seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "epoch_selection": {
+    "training_through": 2024,
+    "validation_season": 2025,
+    "method": "early stopping"
+  },
+  "feature_file": "/Users/paolinol/Desktop/Neural/data/processed/features_v2.csv",
+  "feature_file_sha256": "7fbeff0f0a731cf565541818bd97c9c49f52279ecb4492c56b7ba05c03f8d573",
+  "feature_count": 54,
+  "architecture": {
+    "input_size": 54,
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "outputs": [
+      "standardized_home_margin",
+      "home_win_logit"
+    ],
+    "dropout": 0.2
+  },
+  "training": {
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "max_epoch_selection": 400,
+    "patience": 30,
+    "min_delta": 0.0001,
+    "margin_loss": "SmoothL1Loss",
+    "win_loss": "BCEWithLogitsLoss",
+    "optimizer": "AdamW"
+  },
+  "ensemble_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "epoch_results": [
+    {
+      "seed": 42,
+      "best_epoch": 26,
+      "best_validation_loss": 0.8160387277603149,
+      "validation_margin_mae": 12.771776356096343,
+      "validation_win_brier": 0.18180713985093852
+    },
+    {
+      "seed": 43,
+      "best_epoch": 18,
+      "best_validation_loss": 0.8147772550582886,
+      "validation_margin_mae": 12.721625987939008,
+      "validation_win_brier": 0.181856247530235
+    },
+    {
+      "seed": 44,
+      "best_epoch": 36,
+      "best_validation_loss": 0.8144758939743042,
+      "validation_margin_mae": 12.825228789034165,
+      "validation_win_brier": 0.18129591835039635
+    },
+    {
+      "seed": 45,
+      "best_epoch": 20,
+      "best_validation_loss": 0.8179832696914673,
+      "validation_margin_mae": 12.684734121708107,
+      "validation_win_brier": 0.18276516171439314
+    },
+    {
+      "seed": 46,
+      "best_epoch": 45,
+      "best_validation_loss": 0.8202488422393799,
+      "validation_margin_mae": 12.72953920383153,
+      "validation_win_brier": 0.18259000081896495
+    }
+  ],
+  "final_training_rows": 5705,
+  "margin_normalization": {
+    "mean": 4.1316389132340055,
+    "std": 20.780013568864717
+  },
+  "preprocessing": {
+    "missing_values": "training median",
+    "all_missing_fallback": 0.0,
+    "scaling": "StandardScaler fit on 2018-2025"
+  },
+  "software": {
+    "python_torch": "2.14.0",
+    "scikit_learn": "1.9.0",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5"
+  },
+  "notes": [
+    "This artifact is a research model, not a validated profitable betting system.",
+    "2025 was used as development history for epoch-count selection.",
+    "2026 must remain prospective for evaluation.",
+    "Raw sigmoid output should not be described as a proven fair market probability."
+  ]
+}
