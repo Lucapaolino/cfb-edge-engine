@@ -42,22 +42,20 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-SRC_DIR = PROJECT_ROOT / "src"
-DATA_DIR = PROJECT_ROOT / "data"
-PROCESSED_DIR = DATA_DIR / "processed"
-PROSPECTIVE_DIR = DATA_DIR / "prospective"
-MODEL_DIR = PROJECT_ROOT / "models" / "cfb_nn_2026_v1"
-DB_FILE = DATA_DIR / "cfb.db"
-ENV_FILE = PROJECT_ROOT / ".env"
-
-BOARD_JSON = PROCESSED_DIR / "live_model_market_board_2026_v1.json"
-PREDICTIONS_JSON = PROCESSED_DIR / "live_nn_predictions_2026_v1.json"
-
-STATE_DIR = PROCESSED_DIR / ".game_day_state"
-HISTORY_DB = PROSPECTIVE_DIR / "prediction_history.sqlite"
-HISTORY_REPORT = PROCESSED_DIR / "prediction_history_summary_latest.json"
+from cfb_edge_paths import (
+    BOARD_JSON,
+    DB_FILE,
+    ENV_FILE,
+    HISTORY_DB,
+    HISTORY_REPORT,
+    MODEL_DIR,
+    PREDICTIONS_JSON,
+    PROJECT_ROOT,
+    PROCESSED_DIR,
+    PROSPECTIVE_DIR,
+    SRC_DIR,
+    STATE_DIR,
+)
 
 
 SCRIPTS = {
@@ -308,7 +306,11 @@ def should_refresh(stage_key: str, force: bool) -> tuple[bool, str]:
     )
 
 
-def run_script(stage_name: str, script_key: str, extra_args: list[str] | None = None) -> None:
+def run_script(
+    stage_name: str,
+    script_key: str,
+    extra_args: list[str] | None = None,
+) -> None:
     script = SCRIPTS[script_key]
     print_stage(stage_name)
     print(f"Script: {script.relative_to(PROJECT_ROOT)}")
@@ -399,7 +401,11 @@ def run_live(args: argparse.Namespace) -> None:
     run_quota_aware_stage("REFRESHING GAMES", "games", args.force_data)
     run_quota_aware_stage("REFRESHING TEAM STATS", "team_stats", args.force_data)
     run_quota_aware_stage("REFRESHING PLAYER STATS", "player_stats", args.force_data)
-    run_quota_aware_stage("REFRESHING CONTEXT", "context", args.force_context or args.force_data)
+    run_quota_aware_stage(
+        "REFRESHING CONTEXT",
+        "context",
+        args.force_context or args.force_data,
+    )
 
     run_script("BUILDING LIVE FEATURES", "features")
     run_script("RUNNING FROZEN NEURAL MODEL", "predict")

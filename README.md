@@ -13,6 +13,7 @@ Private college-football prediction and market-analysis project.
 
 - Python 3
 - A CollegeFootballData API key
+- A The Odds API key for reference-market data
 - An OddsPAPI API key for Hard Rock market data
 
 ## Setup
@@ -24,3 +25,11 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
+
+Add your personal API keys to `.env`:
+
+```env
+CFBD_API_KEY=your_key_here
+THE_ODDS_API_KEY=your_key_here
+ODDSPAPI_API_KEY=your_key_here
+```
