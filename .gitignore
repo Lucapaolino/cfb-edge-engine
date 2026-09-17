@@ -19,3 +19,4 @@ data/prospective/
 data/logs/
 data/cfb.db
 data/.DS_Store
+!.env.example
