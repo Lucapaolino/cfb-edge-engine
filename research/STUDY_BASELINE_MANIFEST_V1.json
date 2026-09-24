@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "manifest_type": "CFB_EDGE_RESEARCH_STUDY_BASELINE",
+  "baseline_local_date": "2026-09-24",
+  "study_title": "The Cost of Hindsight: Auditing Real-Time Neural Forecasts Before the Outcome",
+  "study_question": "How different are model-performance conclusions when a real-time forecasting system is evaluated from immutable pre-event records versus reconstructed after outcomes are known?",
+  "study_status": "FROZEN_PROSPECTIVE_BASELINE",
+  "source_code": {
+    "repository": "Lucapaolino/cfb-edge-engine",
+    "baseline_git_commit": "4d0e832977bb0e715729d7fd75dcd4073f17ab2b",
+    "baseline_branch": "main",
+    "included_scope": [
+      "Tracked source code at the baseline Git commit",
+      "Tracked model artifacts under models/cfb_nn_2026_v1",
+      "Private prospective prediction-history records",
+      "Private research documentation"
+    ],
+    "explicitly_excluded_scope": [
+      "Uncommitted .gitignore changes",
+      "Uncommitted customer-viewer packaging scripts",
+      "Customer GUI changes",
+      "API keys and .env",
+      "Wager records and wagering decisions"
+    ]
+  },
+  "frozen_model": {
+    "artifact_directory": "models/cfb_nn_2026_v1",
+    "ensemble_checkpoint_count": 5,
+    "checkpoint_names": [
+      "model_seed_42.pt",
+      "model_seed_43.pt",
+      "model_seed_44.pt",
+      "model_seed_45.pt",
+      "model_seed_46.pt"
+    ],
+    "expected_feature_count": 54,
+    "training_or_tuning_permitted_during_study": false,
+    "personnel_layer_policy": "RESEARCH_CONTEXT_ONLY_NOT_CONNECTED_TO_FROZEN_MODEL"
+  },
+  "artifact_sha256": {
+    "feature_names.json": "002a61cf84c27267ce7842a6ca4ac24dcfb6158888fb2e3d0a3fd421bb8e1fe5",
+    "imputer_medians.json": "4fc5286997e1b748068c5e67f2f70bad869d89d61761249ebf2a9bda4261e589",
+    "metadata.json": "9d962c4c7575def6b6ee8be99cd4a0713e5611cab51492d795e7dc757fa60f09",
+    "model_seed_42.pt": "bb7fba07d1d18e12f863f7937084f0a3f85904459614d24f71bea76c71b54e81",
+    "model_seed_43.pt": "26910fab620ad7e734d9f0ab6109794d1b6dbea7e1649832441ec919e16ea51f",
+    "model_seed_44.pt": "c4027bc4bd2972820ab3b37b72822206f7b4b21a6876e0705b18e5752abcc48c",
+    "model_seed_45.pt": "c4027bc4bd2972820ab3b37b72822206f7b4b21a6876e0705b18e5752abcc48c",
+    "model_seed_46.pt": "16f1b8f5ba9fcfbc3a2ff57fa314b75b994652d92d1247977e59859f4aab3ea9",
+    "scaler.pkl": "8f0318793f665113308a4e89176f7fb9ca6f17b41fb0a78d631d064b45e8b45c",
+    "target_normalization.json": "cb8d0ec8f721be336940d13e27d1d19300d284b98e0335650fd0504d9a70fd17"
+  },
+  "prospective_evidence_summary": {
+    "history_database": "data/prospective/prediction_history.sqlite",
+    "prediction_snapshot_count_at_inventory": 933,
+    "snapshots_captured_before_kickoff": 933,
+    "late_or_unknown_snapshot_timing": 0,
+    "full_54_feature_snapshots": 898,
+    "partial_or_heavily_imputed_snapshots": 35,
+    "hardrock_available_snapshots": 823,
+    "hardrock_unavailable_snapshots": 110,
+    "ensemble_heads_agree_snapshots": 929,
+    "ensemble_heads_disagree_snapshots": 4,
+    "snapshot_count_note": "Snapshot count is not the same as unique-game count because multiple pre-kickoff snapshots may exist for one game."
+  },
+  "prospective_record_requirements": [
+    "Prediction snapshot captured before kickoff",
+    "Immutable snapshot ID, record hash, run ID, and batch hash",
+    "Game identity, season, week, teams, and kickoff timestamp",
+    "Forecast margin, spread, win probability, and ensemble uncertainty",
+    "Input status, feature coverage, warnings, and preserved record payload",
+    "Market fields retained separately for Hard Rock and reference-market data",
+    "Completed result and derived scoring retained separately from prediction snapshot"
+  ],
+  "analysis_restrictions": [
+    "Do not retrain, replace, or tune the frozen model during the study.",
+    "Do not overwrite prospective records with retrospective reconstructions.",
+    "Do not remove poor predictions or partial-input records without reporting them.",
+    "Do not treat strength labels as validated cover probabilities.",
+    "Do not claim a wagering strategy is profitable from diagnostic ATS or unit fields.",
+    "Do not substitute reference-market data for Hard Rock execution data."
+  ],
+  "next_research_requirement": "Build a separate, labeled retrospective-reconstruction dataset and compare it with the immutable prospective records."
+}
