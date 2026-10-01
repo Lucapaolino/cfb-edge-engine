@@ -1,0 +1,11 @@
+services:
+  cfb-runner:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cfb-runner
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models:ro
+    command: ["--dry-run"]

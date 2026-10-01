@@ -20,3 +20,9 @@ data/logs/
 data/cfb.db
 data/.DS_Store
 !.env.example
+dist/
+build/
+data/published/
+
+# Separate NFL research collection artifacts.
+data/nfl/

@@ -1,0 +1,4 @@
+# Optional dependencies for the separate NFL research-collection track.
+# This file does not alter the frozen CFB model environment or retrain it.
+requests==2.34.2
+nflreadpy

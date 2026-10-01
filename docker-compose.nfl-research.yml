@@ -1,0 +1,10 @@
+services:
+  nfl-research:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.nfl-research
+    env_file:
+      - .env
+    volumes:
+      - ./data/nfl:/app/data/nfl
+    command: ["--dry-run"]
