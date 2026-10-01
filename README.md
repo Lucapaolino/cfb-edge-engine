@@ -47,6 +47,7 @@ pip install -r requirements-nfl-research.txt
 # No provider calls and no writes.
 python src/nfl_research_controller_v1.py --dry-run
 python src/test_nfl_research_contract_v1.py
+python src/test_nfl_research_linkage_v1.py
 
 # Explicit, append-only source captures.
 python src/nfl_research_controller_v1.py --capture-schedule --season 2026
@@ -54,6 +55,9 @@ python src/nfl_research_controller_v1.py --capture-market --regions us
 
 # Read-only collection status.
 python src/nfl_research_status_v1.py
+
+# Read-only proof that latest market events link to latest schedule games.
+python src/nfl_research_controller_v1.py --linkage-audit
 ```
 
 ## Container readiness

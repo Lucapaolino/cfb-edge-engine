@@ -10,9 +10,11 @@ RUN pip install --no-cache-dir -r requirements-nfl-research.txt
 
 COPY src/nfl_research_paths_v1.py ./src/
 COPY src/nfl_research_store_v1.py ./src/
+COPY src/nfl_research_linkage_v1.py ./src/
 COPY src/nfl_research_market_capture_v1.py ./src/
 COPY src/nfl_research_schedule_results_v1.py ./src/
 COPY src/nfl_research_status_v1.py ./src/
+COPY src/nfl_research_linkage_audit_v1.py ./src/
 COPY src/nfl_research_controller_v1.py ./src/
 
 ENTRYPOINT ["python", "src/nfl_research_controller_v1.py"]

@@ -7,6 +7,9 @@ The project now has a headless, container-ready NFL research worker. It is separ
 ```bash
 docker compose -f docker-compose.nfl-research.yml build
 docker compose -f docker-compose.nfl-research.yml run --rm nfl-research --dry-run
+
+# Read-only source-linkage health check. It needs the mounted NFL ledger only.
+docker compose -f docker-compose.nfl-research.yml run --rm nfl-research --linkage-audit
 ```
 
 There is also a headless CFB portability check. It mounts the existing local
@@ -34,5 +37,9 @@ The compose file mounts `./data/nfl` at runtime and reads API keys from the exis
 3. Deploy the headless runner to a private staging environment with persistent storage and managed secrets.
 4. Run the cloud copy in parallel with the local CFB workflow before treating it as authoritative.
 5. Only then move scheduled collection jobs off the Mac.
+
+The linkage audit is the first readiness gate for that future scheduler: it
+confirms that the latest captured market events map unambiguously to the latest
+captured NFL schedule without altering either immutable source record.
 
 The current NFL SQLite file is intentionally single-worker local storage. A future multi-worker cloud deployment will need an explicitly planned persistent database/storage migration rather than a silent SQLite lift-and-shift.
