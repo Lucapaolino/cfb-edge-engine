@@ -1,9 +1,9 @@
 # Prospective Analysis Plan V1
 
-**Project:** Beyond Hindsight: Building an Auditable Neural Decision-Support System for Real-Time Forecasting  
-**Date recorded:** October 1, 2026  
-**Version:** 1.0  
-**Test environment:** Live 2026 college-football forecasting
+- **Project:** Beyond Hindsight: Building an Auditable Neural Decision-Support System for Real-Time Forecasting
+- **Date recorded:** October 1, 2026
+- **Version:** 1.0
+- **Test environment:** Live 2026 college-football forecasting
 
 ## 1. Purpose
 
